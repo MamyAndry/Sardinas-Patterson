@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Code Tester</title>
+    <link rel="stylesheet" href="./assets/css/style.css">
+</head>
+
+<style>
+    body{
+        background-image: url("./assets/img/3174286.jpg");
+        background-position: cover;
+    }
+</style>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="container-fluid" id="results">
+        </div>
+    
+        </div>
+        <div class="row-content">
+            <h1>Insert Code here</h1>
+            <form action="/is_code/" method="post" enctype="multipart/form-data" id="post-form">
+                <div class="form-group">
+                    <label for="" class="form-label"></label>
+                    <input  class="form-input" type="text" name="code" id="code">
+                </div>
+                <div class="button-form">
+                    <button class="button" type="submit"> Envoyer </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</body>
+</html>
+
+<script src="assets/js/jquery-3.7.1.min.js"></script>
+<script>
+    $('#post-form').on('submit', function(event){
+        event.preventDefault();
+        is_code();  
+    });
+
+    function is_code() {
+        var datas = { code : $('#code').val() }
+        console.log(datas)
+        $.ajax({
+            url : "http://localhost:5000/is_code", // the endpoint
+            type : "POST", // http method
+            data : datas, // data sent with the post request
+
+            // handle a successful response
+            success : function(json) {
+                console.log(json) 
+                $('#results').html(
+                    "<div class='card'>" 
+                        + "<div class='header'> Sardinas-Patterson </div class='card '>"
+                        + "<div class='body'> <h3>Result :" +json.sp_result + "  </h3></div>" +
+                    "</div> "
+                    +
+                    "<div class='card'>"
+                        + "<div class='header'> Machine Learning </div class='card '>"
+                        + "<div class='body'> <h3>Result :" +json.model_result + " </h3></div>" +
+                    "</div>"
+                )
+                $('#code').val(''); // remove the value from the input
+            },
+
+            // handle a non-successful response
+            error : function(xhr,errmsg,err) {
+                $('#results').html(
+                    "<div class='error'>"
+                        + xhr.errmsg +    
+                    "</div>"
+                )
+                console.log(xhr.status + ": " + xhr.responseText); // provide a bit more info about the error to the console
+            }
+        });
+    };
+</script>
