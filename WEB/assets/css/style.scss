@@ -12,14 +12,16 @@
         margin-bottom: 2%;
         margin-left: auto;
         margin-right: auto;
-        margin-top: 2%;
-        background-color: whitesmoke;
+        margin-top: 25%;
+        background-color: rgb(243, 243, 243);
     }
-
 }
 
 .container-fluid{
     display: flex;
+    width: 100%;
+    top:0;
+    position: absolute;
 }
 
 form{
@@ -43,7 +45,6 @@ form{
     background-color: #083e08;
     border-radius: 10%;
     border: none;
-    // border-style: groove;
     width: auto;
     height: 4cap;
     box-sizing: content-box;
@@ -56,23 +57,86 @@ form{
 }
 
 .card{
-    // border: solid 1px;
     margin-left: 2%;
     padding: 1% 1% 1% 1% ;
     width: 50%;
     font-family: sans-serif;
-    background-color: antiquewhite;
-
+    position: relative;
+    border: 1% solid;
+    animation: apparition 1s linear;
     .header{
         font-size: x-large;
+        text-align: center;
         width: auto;
     }
     .body{
         font-size: medium;
+        text-align: center;
         width: auto;
     }
 }
 
-H1, h2, h3{
+.code-true{
+    background-image: url("../img/vert.jpg");
+    background-size: contain;
+    color: rgb(73, 255, 100);  
+    font-size: larger;  
+    height: auto;
+}
+
+.code-false{
+    background-image: url("../img/rouge.jpg");
+    background-size: contain; 
+    color: rgb(216, 63, 63);  
+    font-size: larger;  
+    height: auto;
+}
+
+.code{
+    background-image: url("../img/bleu.jpg");
+    background-size: cover;
+    border-radius: 50%;
+    height: 100px;
+    font-display: center;
+    width: 20%;
+    color: aliceblue;
+    margin-right: auto;
+    margin-left: auto;
+    overflow: hidden;
+    font-display: center;
+}
+
+.resultat{
+    margin-top: 8%;
+    border-radius: 50px;
+    width: 20%;
+}
+
+.sardinas-patterson{
+    margin-right: 5%;
+    margin-left: 5%;
+    @extend .resultat
+}
+.machine-learning{
+    margin-left: 5%;   
+    margin-right: 10%;
+    @extend .resultat
+}
+
+h1, h2, h3{
     font-family: sans-serif;
+}
+
+@keyframes apparition {
+    0%{
+        width:5%;
+        opacity: 10%;
+        color: none;
+        margin-top: 10%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    100%{
+
+    }
 }

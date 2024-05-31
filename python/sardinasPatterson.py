@@ -1,7 +1,7 @@
 class SardinasPatterson:
     language = list()
     step = list()
-    epsilon = ""
+    epsilon = ""    
 
     def divide(self, L1, L2):
         res = set()
@@ -11,12 +11,6 @@ class SardinasPatterson:
                     if(item[len(elt):] == ''):
                         self.epsilon = elt
                     res.add(item[len(elt):])
-        return res
-    
-    def create_list(self, lst):
-        res = []
-        for elt in lst:
-            res.append(elt)
         return res
     
     def get_L1(self):
@@ -48,15 +42,15 @@ class SardinasPatterson:
         return ''.join(res)
 
     def make_code(self):
-        initial = self.create_list(self.language)
-        temp = self.create_list(initial)
+        initial = self.language.copy()
+        temp = initial.copy()
         temp_2 = None
         for i in range(len(temp)):
-            self.language = self.create_list(initial)
-            temp = self.create_list(initial)
+            self.language = initial.copy()
+            temp = initial.copy()
             temp.pop(i)
             self.language = temp
-            temp_2 = self.create_list(temp)
+            temp_2 = temp.copy()
             if(self.is_code()[0] == True):
                 return self.language
             for j in range(len(temp_2)):
@@ -67,6 +61,7 @@ class SardinasPatterson:
         return list()
 
     def is_code(self):
+        self.step.clear()
         if(len(self.language) == 1):
             return True, 'It stops at L1'
         temp = self.get_L1()

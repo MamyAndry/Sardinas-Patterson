@@ -9,7 +9,7 @@
 
 <style>
     body{
-        background-image: url("./assets/img/3174286.jpg");
+        background-image: url("./assets/img/blanc.jpg");
         background-position: cover;
     }
 </style>
@@ -25,7 +25,7 @@
             <form action="/is_code/" method="post" enctype="multipart/form-data" id="post-form">
                 <div class="form-group">
                     <label for="" class="form-label"></label>
-                    <input  class="form-input" type="text" name="code" id="code">
+                    <input  class="form-input" type="text"  value="1,0" name="code"id="code" >
                 </div>
                 <div class="button-form">
                     <button class="button" type="submit"> Envoyer </button>
@@ -54,19 +54,30 @@
 
             // handle a successful response
             success : function(json) {
-                console.log(json) 
+                console.log(json); 
+                var style_ml = "code-true";
+                var style_sp = "code-true";
+                if(json.sp_result === 'False'){
+                    style_sp = "code-false"
+                }
+                if(json.model_result === 'False'){
+                    style_ml = "code-false"
+                }
                 $('#results').html(
-                    "<div class='card'>" 
-                        + "<div class='header'> Sardinas-Patterson </div class='card '>"
-                        + "<div class='body'> <h3>Result :" +json.sp_result + "  </h3></div>" +
-                    "</div> "
+                    "<div class='card sardinas-patterson " + style_sp + "'>" 
+                        + "<div class='header'><h1> Sardinas-Patterson </h1></div class='card '>"
+                        + "<div class='body'> <h1>" +json.sp_result + " </h1></div>" +
+                    "</div> "+
+                    "<div class='card code'>"
+                        + "<div class='body'> <h2> " +json.code + " </h2></div>" +
+                    "</div>"
                     +
-                    "<div class='card'>"
-                        + "<div class='header'> Machine Learning </div class='card '>"
-                        + "<div class='body'> <h3>Result :" +json.model_result + " </h3></div>" +
+                    "<div class='card machine-learning " + style_ml + "'>"
+                        + "<div class='header'><h1> Machine Learning </h1> </div class='card '>"
+                        + "<div class='body'> <h1>" +json.model_result + " </h1></div>" +
                     "</div>"
                 )
-                $('#code').val(''); // remove the value from the input
+                $('#code').val(json.code); // remove the value from the input
             },
 
             // handle a non-successful response
